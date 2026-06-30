@@ -129,6 +129,7 @@ $devNote = DEV_MODE ? '<div class="dev-code" id="devcode-%s" style="display:none
       <?php if ($me['email_verified']): ?>
         <span class="badge ok"><?= icon('check') ?> تأیید شده</span>
       <?php else: ?>
+        <span class="badge no"><?= icon('x') ?> تأیید نشده</span>
         <button class="btn btn-soft btn-sm" data-send-code="email">ارسال کد تأیید</button>
       <?php endif; ?>
     </div>
@@ -153,6 +154,7 @@ $devNote = DEV_MODE ? '<div class="dev-code" id="devcode-%s" style="display:none
       <?php if ($me['phone_verified']): ?>
         <span class="badge ok"><?= icon('check') ?> تأیید شده</span>
       <?php else: ?>
+        <span class="badge no"><?= icon('x') ?> تأیید نشده</span>
         <button class="btn btn-soft btn-sm" data-send-code="phone">ارسال کد تأیید</button>
       <?php endif; ?>
     </div>
