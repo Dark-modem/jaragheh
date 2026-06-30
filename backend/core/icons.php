@@ -52,6 +52,9 @@ function icon(string $name, string $cls = ''): string
         'rocket'   => '<path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2a2.8 2.8 0 0 0-3-3Z"/><path d="M9 13c-1-3 .5-7 4-9.5C16 1.6 20 2 20 2s.4 4-1.5 7c-2.5 3.5-6.5 5-9.5 4Z"/><path d="M9 13l2 2"/><circle cx="15" cy="8" r="1.4"/>',
         'list'     => '<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
         'globe'    => '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.4 2.5 15 0 18M12 3c-2.5 2.4-2.5 15 0 18"/>',
+        'bell'     => '<path d="M18 8a6 6 0 1 0-12 0c0 6-2 7-2 7h16s-2-1-2-7"/><path d="M10.3 20a2 2 0 0 0 3.4 0"/>',
+        'ban'      => '<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
+        'message'  => '<path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3 21l1.9-5.8A8.5 8.5 0 1 1 21 11.5Z"/>',
     ];
     $body = $p[$name] ?? '';
     $class = trim('icn ' . $cls);
