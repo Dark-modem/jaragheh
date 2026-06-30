@@ -19,8 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$idval, $idval, $idval]);
         $user = $stmt->fetch();
         if ($user && password_verify($pass, $user['password'])) {
-            login_user((int)$user['id']);
-            redirect($user['role'] === 'admin' ? 'admin/index.php' : 'panel/index.php');
+            if ($user['role'] !== 'admin' && (int)($user['banned'] ?? 0) === 1) {
+                $error = 'دسترسی شما توسط مدیریت مسدود شده است.';
+            } else {
+                login_user((int)$user['id']);
+                redirect($user['role'] === 'admin' ? 'admin/index.php' : 'panel/index.php');
+            }
         } else {
             $error = 'نام کاربری یا رمز عبور اشتباه است.';
         }
