@@ -1,0 +1,27 @@
+# جرقه | تنظیمات امنیتی و عمومی
+
+# کدگذاری پیش‌فرض
+AddDefaultCharset UTF-8
+
+# جلوگیری از لیست شدن فایل‌های پوشه
+Options -Indexes
+
+# هدرهای امنیتی
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# مسدودسازی دسترسی مستقیم به فایل‌های حساس
+<FilesMatch "\.(sql|log|md)$">
+    Require all denied
+</FilesMatch>
+
+# محافظت از فایل پیکربندی
+<Files "config.php">
+    Require all denied
+</Files>
+
+# صفحات خطا
+ErrorDocument 403 "دسترسی غیرمجاز"
