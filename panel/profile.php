@@ -111,7 +111,7 @@ $devNote = DEV_MODE ? '<div class="dev-code" id="devcode-%s" style="display:none
 
 <div class="page-title">
   <h2>پروفایل من</h2>
-  <p>شناسه عددی شما: <span class="id-chip"><?= fa_num($me['id']) ?></span></p>
+  <p>اطلاعات حساب کاربری خود را مدیریت کنید.</p>
 </div>
 
 <div class="grid-cols cols-2">
