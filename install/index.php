@@ -96,6 +96,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $errors[] = 'فایل install.sql پیدا نشد.';
             }
             if (!$errors) $report[] = "جداول بررسی/ساخته شدند ({$created} جدول).";
+
+            // ---------- مهاجرت امن: افزودن ستون‌های جدید به جدول users موجود ----------
+            if (!$errors) {
+                $cols = [];
+                foreach ($pdo->query("SHOW COLUMNS FROM `users`")->fetchAll() as $col) {
+                    $cols[$col['Field']] = true;
+                }
+                if (!isset($cols['banned'])) {
+                    $pdo->exec("ALTER TABLE `users` ADD COLUMN `banned` TINYINT(1) NOT NULL DEFAULT 0 AFTER `role`");
+                    $report[] = 'ستون banned به جدول کاربران اضافه شد.';
+                }
+                if (!isset($cols['can_use_gateway'])) {
+                    $pdo->exec("ALTER TABLE `users` ADD COLUMN `can_use_gateway` TINYINT(1) NOT NULL DEFAULT 1 AFTER `banned`");
+                    $report[] = 'ستون can_use_gateway به جدول کاربران اضافه شد.';
+                }
+            }
         } catch (Throwable $e) {
             $errors[] = 'خطا در ساخت جداول: ' . $e->getMessage();
         }
