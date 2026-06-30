@@ -93,6 +93,12 @@ function require_login(): array
     if (!$u) {
         redirect('login.php');
     }
+    // کاربر مسدودشده از پنل خارج می‌شود (مدیرها مستثنا)
+    if (($u['role'] ?? '') !== 'admin' && (int)($u['banned'] ?? 0) === 1) {
+        logout_user();
+        flash('error', 'دسترسی شما توسط مدیریت مسدود شده است.');
+        redirect('login.php');
+    }
     return $u;
 }
 
