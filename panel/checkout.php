@@ -19,6 +19,8 @@ $amount = (int)($hasOff ? $pkg['discount_price'] : $pkg['price']);
 
 $cardEnabled  = setting('gateway_card_enabled', '1') === '1';
 $aqayeEnabled = (bool)aqaye_cfg('enabled');
+// دسترسی کاربر به درگاه آنلاین (قابل کنترل توسط ادمین از پنل کاربران)
+$meCanUseOnline = (int)($me['can_use_gateway'] ?? 1) === 1;
 
 // ثبت سفارش
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect('panel/checkout.php?package=' . $pkgId);
     }
     if ($gateway === 'card' && !$cardEnabled) { flash('error', 'درگاه کارت‌به‌کارت غیرفعال است.'); redirect('panel/checkout.php?package=' . $pkgId); }
-    if ($gateway === 'aqayepardakht' && !$aqayeEnabled) { flash('error', 'درگاه آنلاین غیرفعال است.'); redirect('panel/checkout.php?package=' . $pkgId); }
+    if ($gateway === 'aqayepardakht' && (!$aqayeEnabled || !$meCanUseOnline)) { flash('error', 'درگاه آنلاین برای شما فعال نیست.'); redirect('panel/checkout.php?package=' . $pkgId); }
 
     $orderNo = make_order_number();
     $status  = $gateway === 'card' ? 'awaiting' : 'pending';
@@ -77,7 +79,7 @@ require __DIR__ . '/../frontend/views/inc/panel_header.php';
       <?= csrf_field() ?>
       <input type="hidden" name="package" value="<?= (int)$pkg['id'] ?>">
 
-      <?php if ($aqayeEnabled): ?>
+      <?php if ($aqayeEnabled && $meCanUseOnline): ?>
       <label class="gateway-opt">
         <input type="radio" name="gateway" value="aqayepardakht">
         <span>
@@ -109,7 +111,11 @@ require __DIR__ . '/../frontend/views/inc/panel_header.php';
         </div>
       </div>
 
-      <button class="btn btn-primary btn-block" type="submit"><?= icon('check') ?> ثبت و ادامه</button>
+      <?php if (!($aqayeEnabled && $meCanUseOnline) && !$cardEnabled): ?>
+        <div class="flash error">در حال حاضر روش پرداختی برای شما فعال نیست. برای کسب اطلاعات بیشتر با پشتیبانی در تماس باشید.</div>
+      <?php else: ?>
+        <button class="btn btn-primary btn-block" type="submit"><?= icon('check') ?> ثبت و ادامه</button>
+      <?php endif; ?>
     </form>
   </div>
 </div>
