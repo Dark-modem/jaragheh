@@ -7,6 +7,14 @@ $active = $active ?? 'home';
 $pageTitle = $pageTitle ?? 'پنل کاربری';
 $initial = mb_substr($me['username'], 0, 1, 'UTF-8');
 
+// تعداد اعلان‌های خوانده‌نشده
+$unreadNotifs = 0;
+try {
+    $cstmt = db()->prepare('SELECT COUNT(*) FROM notifications WHERE user_id = ? AND is_read = 0');
+    $cstmt->execute([$me['id']]);
+    $unreadNotifs = (int)$cstmt->fetchColumn();
+} catch (Throwable $e) { /* جدول notifications هنوز ساخته نشده */ }
+
 function pnav(string $key, string $active): string { return $key === $active ? 'active' : ''; }
 ?>
 <!DOCTYPE html>
@@ -34,6 +42,10 @@ function pnav(string $key, string $active): string { return $key === $active ? '
       <a href="<?= url('panel/buy.php') ?>" class="<?= pnav('buy',$active) ?>"><?= icon('cart') ?> خرید بسته</a>
       <a href="<?= url('panel/support.php') ?>" class="<?= pnav('support',$active) ?>"><?= icon('ticket') ?> پشتیبانی</a>
       <a href="<?= url('panel/orders.php') ?>" class="<?= pnav('orders',$active) ?>"><?= icon('orders') ?> سفارشات</a>
+      <a href="<?= url('panel/notifications.php') ?>" class="<?= pnav('notifs',$active) ?>">
+        <?= icon('bell') ?> اعلان‌ها
+        <?php if ($unreadNotifs > 0): ?><span class="badge no nav-badge"><?= fa_num($unreadNotifs) ?></span><?php endif; ?>
+      </a>
     </nav>
     <div class="side-foot">
       <nav class="side-nav">
