@@ -212,6 +212,18 @@ function aqaye_cfg_save(array $values): bool
     return @file_put_contents(aqaye_cfg_path(), $json) !== false;
 }
 
+// ---------- آواتار کاربر (DiceBear) ----------
+/** ساخت آدرس آواتار کاربر بر اساس نام کاربری (پایدار و یکتا برای هر نام) */
+function avatar_url(string $username, int $size = 80): string
+{
+    $seed = rawurlencode(trim($username) ?: 'user');
+    $bgs  = 'b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf,c6f6d5,fde68a';
+    return 'https://api.dicebear.com/9.x/avataaars/svg?radius=50'
+        . '&backgroundColor=' . $bgs
+        . '&size=' . max(16, $size)
+        . '&seed=' . $seed;
+}
+
 // ---------- اعداد و قیمت فارسی ----------
 function fa_num($input): string
 {
