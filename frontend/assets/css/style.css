@@ -329,6 +329,27 @@ input,select,textarea{font-family:inherit;}
 .side-foot .logout{color:var(--red);}
 .side-foot .logout:hover{background:rgba(245,115,111,.08);}
 
+/* دکمه جمع‌کردن سایدبار */
+.sidebar .brand{flex-wrap:wrap;align-items:center;}
+.brand-text{flex:1;min-width:0;overflow:hidden;white-space:nowrap;transition:opacity .18s;}
+.sidebar-collapse{
+  flex-shrink:0;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--muted);
+  transition:transform .25s,color .18s,border-color .18s;cursor:pointer;
+}
+.sidebar-collapse:hover{color:var(--text);border-color:var(--spark);}
+.sidebar-collapse svg{width:16px;height:16px;}
+/* در RTL دکمه chevron به سمت چپ اشاره می‌کند → جمع‌شده = چرخش به راست */
+.sidebar.collapsed .sidebar-collapse{transform:rotate(180deg);}
+
+/* حالت جمع‌شدهٔ سایدبار (فقط دسکتاپ) */
+.sidebar.collapsed{width:78px;padding:1.4rem .6rem;}
+.sidebar.collapsed .brand-text,
+.sidebar.collapsed .nav-label,
+.sidebar.collapsed .nav-badge{display:none;}
+.sidebar.collapsed .side-nav a{justify-content:center;padding:.75rem;}
+.sidebar.collapsed .tag{display:none;}
+
 .panel-main{flex:1;min-width:0;display:flex;flex-direction:column;}
 .panel-top{
   display:flex;align-items:center;justify-content:space-between;gap:1rem;
@@ -517,6 +538,14 @@ table.tbl tbody tr:hover{background:rgba(255,255,255,.015);}
   .sidebar-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:55;display:none;}
   .sidebar-backdrop.open{display:block;}
   .msg{max-width:92%;}
+  /* موبایل: حالت جمع‌شده لغو شود — کشو همیشه کامل */
+  .sidebar.collapsed{width:262px;padding:1.4rem 1rem;}
+  .sidebar.collapsed .brand-text,
+  .sidebar.collapsed .nav-label,
+  .sidebar.collapsed .nav-badge,
+  .sidebar.collapsed .tag{display:initial;}
+  .sidebar.collapsed .side-nav a{justify-content:flex-start;padding:.75rem .85rem;}
+  .sidebar-collapse{display:none;}
 }
 @media(max-width:440px){
   .games-grid{grid-template-columns:1fr;}
