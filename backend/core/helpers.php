@@ -6,13 +6,23 @@ require_once __DIR__ . '/db.php';
 
 // ---------- شروع نشست امن ----------
 if (session_status() === PHP_SESSION_NONE) {
+    // تشخیص HTTPS با پشتیبانی از پراکسی معکوس (X-Forwarded-Proto)
+    $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https');
+
+    // برای بازگشت از درگاه پرداخت (درخواست cross-site) کوکی نشست باید ارسال شود.
+    // با SameSite=None (به‌همراه Secure) نشست کاربر پس از بازگشت از درگاه حفظ می‌شود
+    // و کاربر به اشتباه به صفحه ورود هدایت نمی‌شود. اگر HTTPS نباشد به Lax برمی‌گردیم
+    // چون مرورگرها None بدون Secure را نمی‌پذیرند.
+    $sameSite = $isHttps ? 'None' : 'Lax';
+
     session_set_cookie_params([
         'lifetime' => 0,
         'path'     => '/',
         'domain'   => '',
-        'secure'   => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+        'secure'   => $isHttps,
         'httponly' => true,
-        'samesite' => 'Lax',
+        'samesite' => $sameSite,
     ]);
     session_start();
 }
