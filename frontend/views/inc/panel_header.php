@@ -73,7 +73,7 @@ function pnav(string $key, string $active): string { return $key === $active ? '
           <small>شناسه <?= fa_num($me['id']) ?></small>
           <b><?= e($me['username']) ?></b>
         </span>
-        <span class="av"><?= e($initial) ?></span>
+        <span class="av"><img src="<?= e(avatar_url($me['username'], 64)) ?>" alt="" width="32" height="32"></span>
       </a>
     </div>
 
