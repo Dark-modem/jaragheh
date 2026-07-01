@@ -59,7 +59,7 @@ function anav(string $key, string $active): string { return $key === $active ? '
         <span class="who" style="text-align:left">
           <small>مدیر</small><b><?= e($me['username']) ?></b>
         </span>
-        <span class="av"><?= e($initial) ?></span>
+        <span class="av"><img src="<?= e(avatar_url($me['username'], 64)) ?>" alt="" width="32" height="32"></span>
       </div>
     </div>
 
