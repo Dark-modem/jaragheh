@@ -114,6 +114,14 @@ $devNote = DEV_MODE ? '<div class="dev-code" id="devcode-%s" style="display:none
   <p>اطلاعات حساب کاربری خود را مدیریت کنید.</p>
 </div>
 
+<!-- ====== سرآیند آواتار ====== -->
+<div class="card profile-hero">
+  <img class="profile-hero-av" src="<?= e(avatar_url($me['username'], 120)) ?>" alt="آواتار <?= e($me['username']) ?>" width="80" height="80">
+  <div>
+    <h3><?= e($me['username']) ?></h3>
+  </div>
+</div>
+
 <div class="grid-cols cols-2">
 
   <!-- ====== ایمیل و شماره + تأیید ====== -->
