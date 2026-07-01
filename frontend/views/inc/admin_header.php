@@ -23,21 +23,22 @@ function anav(string $key, string $active): string { return $key === $active ? '
   <aside class="sidebar" id="sidebar">
     <a href="<?= url('admin/index.php') ?>" class="brand">
       <span class="spark"><?= icon('shield') ?></span>
-      <span><b><?= e(SITE_NAME) ?></b><br><span class="tag" style="font-size:.68rem;color:var(--muted)">پنل مدیریت</span></span>
+      <span class="brand-text"><b><?= e(SITE_NAME) ?></b><br><span class="tag" style="font-size:.68rem;color:var(--muted)">پنل مدیریت</span></span>
+      <button class="sidebar-collapse" id="sidebarCollapse" type="button" aria-label="جمع کردن منو"><?= icon('chevron') ?></button>
     </a>
     <nav class="side-nav">
-      <a href="<?= url('admin/index.php') ?>" class="<?= anav('dash',$active) ?>"><?= icon('gauge') ?> داشبورد</a>
-      <a href="<?= url('admin/users.php') ?>" class="<?= anav('users',$active) ?>"><?= icon('users') ?> کاربران</a>
-      <a href="<?= url('admin/orders.php') ?>" class="<?= anav('orders',$active) ?>"><?= icon('orders') ?> سفارشات</a>
-      <a href="<?= url('admin/products.php') ?>" class="<?= anav('products',$active) ?>"><?= icon('box') ?> محصولات</a>
-      <a href="<?= url('admin/games.php') ?>" class="<?= anav('games',$active) ?>"><?= icon('gamepad') ?> بازی‌ها</a>
-      <a href="<?= url('admin/support.php') ?>" class="<?= anav('support',$active) ?>"><?= icon('ticket') ?> پشتیبانی</a>
-      <a href="<?= url('admin/settings.php') ?>" class="<?= anav('settings',$active) ?>"><?= icon('gateway') ?> درگاه‌ها</a>
+      <a href="<?= url('admin/index.php') ?>" class="<?= anav('dash',$active) ?>" title="داشبورد"><?= icon('gauge') ?> <span class="nav-label">داشبورد</span></a>
+      <a href="<?= url('admin/users.php') ?>" class="<?= anav('users',$active) ?>" title="کاربران"><?= icon('users') ?> <span class="nav-label">کاربران</span></a>
+      <a href="<?= url('admin/orders.php') ?>" class="<?= anav('orders',$active) ?>" title="سفارشات"><?= icon('orders') ?> <span class="nav-label">سفارشات</span></a>
+      <a href="<?= url('admin/products.php') ?>" class="<?= anav('products',$active) ?>" title="محصولات"><?= icon('box') ?> <span class="nav-label">محصولات</span></a>
+      <a href="<?= url('admin/games.php') ?>" class="<?= anav('games',$active) ?>" title="بازی‌ها"><?= icon('gamepad') ?> <span class="nav-label">بازی‌ها</span></a>
+      <a href="<?= url('admin/support.php') ?>" class="<?= anav('support',$active) ?>" title="پشتیبانی"><?= icon('ticket') ?> <span class="nav-label">پشتیبانی</span></a>
+      <a href="<?= url('admin/settings.php') ?>" class="<?= anav('settings',$active) ?>" title="درگاه‌ها"><?= icon('gateway') ?> <span class="nav-label">درگاه‌ها</span></a>
     </nav>
     <div class="side-foot">
       <nav class="side-nav">
-        <a href="<?= url('index.php') ?>"><?= icon('home') ?> مشاهده سایت</a>
-        <a href="<?= url('logout.php') ?>" class="logout"><?= icon('logout') ?> خروج</a>
+        <a href="<?= url('index.php') ?>" title="مشاهده سایت"><?= icon('home') ?> <span class="nav-label">مشاهده سایت</span></a>
+        <a href="<?= url('logout.php') ?>" class="logout" title="خروج"><?= icon('logout') ?> <span class="nav-label">خروج</span></a>
       </nav>
     </div>
   </aside>
