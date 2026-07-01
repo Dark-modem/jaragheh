@@ -119,7 +119,6 @@ $devNote = DEV_MODE ? '<div class="dev-code" id="devcode-%s" style="display:none
   <img class="profile-hero-av" src="<?= e(avatar_url($me['username'], 120)) ?>" alt="آواتار <?= e($me['username']) ?>" width="80" height="80">
   <div>
     <h3><?= e($me['username']) ?></h3>
-    <p>آواتار شما به‌صورت خودکار بر اساس نام کاربری ساخته می‌شود.</p>
   </div>
 </div>
 
