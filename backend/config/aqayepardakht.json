@@ -1,0 +1,8 @@
+{
+    "pin": "sandbox",
+    "enabled": true,
+    "create_url": "https://panel.aqayepardakht.ir/api/v2/create",
+    "verify_url": "https://panel.aqayepardakht.ir/api/v2/verify",
+    "startpay_url": "https://panel.aqayepardakht.ir/startpay/",
+    "_help": "مقدار pin همان کد مرچنت/پین درگاه آقای پرداخت است. برای تست بدون پول واقعی مقدار را sandbox بگذارید. در صورت اشتباه بودن، فقط همین فایل را ویرایش کنید."
+}
