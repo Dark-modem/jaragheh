@@ -35,22 +35,21 @@ function pnav(string $key, string $active): string { return $key === $active ? '
   <aside class="sidebar" id="sidebar">
     <a href="<?= url('index.php') ?>" class="brand">
       <span class="spark"><?= icon('spark') ?></span>
-      <span><b><?= e(SITE_NAME) ?></b></span>
+      <span class="brand-text"><b><?= e(SITE_NAME) ?></b></span>
     </a>
     <nav class="side-nav">
-      <a href="<?= url('panel/index.php') ?>" class="<?= pnav('home',$active) ?>"><?= icon('home') ?> خانه</a>
-      <a href="<?= url('panel/buy.php') ?>" class="<?= pnav('buy',$active) ?>"><?= icon('cart') ?> خرید بسته</a>
-      <a href="<?= url('panel/support.php') ?>" class="<?= pnav('support',$active) ?>"><?= icon('ticket') ?> پشتیبانی</a>
-      <a href="<?= url('panel/orders.php') ?>" class="<?= pnav('orders',$active) ?>"><?= icon('orders') ?> سفارشات</a>
-      <a href="<?= url('panel/notifications.php') ?>" class="<?= pnav('notifs',$active) ?>">
-        <?= icon('bell') ?> اعلان‌ها
-        <?php if ($unreadNotifs > 0): ?><span class="badge no nav-badge"><?= fa_num($unreadNotifs) ?></span><?php endif; ?>
-      </a>
+      <a href="<?= url('panel/index.php') ?>" class="<?= pnav('home',$active) ?>" title="خانه"><?= icon('home') ?> <span class="nav-label">خانه</span></a>
+      <a href="<?= url('panel/buy.php') ?>" class="<?= pnav('buy',$active) ?>" title="خرید بسته"><?= icon('cart') ?> <span class="nav-label">خرید بسته</span></a>
+      <a href="<?= url('panel/support.php') ?>" class="<?= pnav('support',$active) ?>" title="پشتیبانی"><?= icon('ticket') ?> <span class="nav-label">پشتیبانی</span></a>
+      <a href="<?= url('panel/orders.php') ?>" class="<?= pnav('orders',$active) ?>" title="سفارشات"><?= icon('orders') ?> <span class="nav-label">سفارشات</span></a>
     </nav>
     <div class="side-foot">
+      <button class="sidebar-collapse" id="sidebarCollapse" type="button" aria-label="جمع کردن منو" title="جمع کردن منو">
+        <?= icon('chevron') ?> <span class="nav-label">جمع کردن منو</span>
+      </button>
       <nav class="side-nav">
-        <a href="<?= url('panel/profile.php') ?>" class="<?= pnav('profile',$active) ?>"><?= icon('user') ?> پروفایل</a>
-        <a href="<?= url('logout.php') ?>" class="logout"><?= icon('logout') ?> خروج</a>
+        <a href="<?= url('panel/profile.php') ?>" class="<?= pnav('profile',$active) ?>" title="پروفایل"><?= icon('user') ?> <span class="nav-label">پروفایل</span></a>
+        <a href="<?= url('logout.php') ?>" class="logout" title="خروج"><?= icon('logout') ?> <span class="nav-label">خروج</span></a>
       </nav>
     </div>
   </aside>
